@@ -1,5 +1,5 @@
 # Convolution-Neural-Networks
-CNN，Residual Network，Dense Network
+CNN，Residual Network，Dense Network  
 实验数据集：MNIST手写数字  
 CNN  
 training accuracy：  
