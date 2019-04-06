@@ -116,8 +116,8 @@ flat = tf.reshape(pooling3, [-1,4*4*128])   #将向量拉直
 
 w_fc1 = weight_variable([4 * 4 * 128, 1024])
 b_fc1 = bias_variable([1024])
-
 h_fc1 = tf.nn.relu(tf.matmul(flat, w_fc1) + b_fc1)
+
 keep_prob = tf.placeholder(tf.float32)
 h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)
 w_fc2 = weight_variable([1024, 10])
@@ -125,8 +125,7 @@ b_fc2 = bias_variable([10])
 y_conv = tf.matmul(h_fc1_drop, w_fc2) + b_fc2
 
 #建立损失函数，在这里采用交叉熵函数
-cross_entropy = tf.reduce_mean(
-                        tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=y_conv))
+cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=y_conv))
 
 train_step = tf.train.AdamOptimizer(1e-3).minimize(cross_entropy)
 correct_prediction = tf.equal(tf.argmax(y_conv,1), tf.argmax(y,1))
