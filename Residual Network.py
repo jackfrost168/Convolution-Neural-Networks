@@ -41,26 +41,14 @@ def identity_block(X_input, kernel_size, in_filter, out_filters, stage, block):
             X_shortcut = X_input
 
             #first
-            #W_conv1 = weight_variable([1, 1, in_filter, f1])
-            #X = tf.nn.conv2d(X_input, W_conv1, strides=[1, 1, 1, 1], padding='SAME')
-            #b_conv1 = bias_variable([f1])
-            #X = tf.nn.relu(X+ b_conv1)
             X = tf.layers.conv2d(X_input, f1, (1,1), padding='SAME', activation=tf.nn.relu)
 
             #second
-            #W_conv2 = weight_variable([kernel_size, kernel_size, f1, f2])
-            #X = tf.nn.conv2d(X, W_conv2, strides=[1, 1, 1, 1], padding='SAME')
-            #b_conv2 = bias_variable([f2])
-            #X = tf.nn.relu(X+ b_conv2)
             X = tf.layers.conv2d(X, f2, (kernel_size, kernel_size), padding='SAME', activation=tf.nn.relu)
 
             #third
-
-            #W_conv3 = weight_variable([1, 1, f2, f3])
-            #X = tf.nn.conv2d(X, W_conv3, strides=[1, 1, 1, 1], padding='SAME')
-            #b_conv3 = bias_variable([f3])
-            #X = tf.nn.relu(X+ b_conv3)
             X = tf.layers.conv2d(X, f3, (1,1), padding='SAME', activation=tf.nn.relu)
+            
             #final step
             add = tf.add(X, X_shortcut)
             b_conv_fin = bias_variable([f3])
@@ -94,25 +82,14 @@ def convolutional_block( X_input, kernel_size, in_filter,
 
             x_shortcut = X_input
             #filter 1*1*f1
-            #W_conv1 = weight_variable([1, 1, in_filter, f1])
-            #X = tf.nn.conv2d(X_input, W_conv1,strides=[1, stride, stride, 1],padding='SAME')
-            #b_conv1 = bias_variable([f1])
-            #X = tf.nn.relu(X + b_conv1)
             X = tf.layers.conv2d(X_input, f1, (1,1), padding='SAME', activation=tf.nn.relu)
 
             #second 3*3*f2
-            #W_conv2 =weight_variable([kernel_size, kernel_size, f1, f2])
-            #X = tf.nn.conv2d(X, W_conv2, strides=[1,1,1,1], padding='SAME')
-            #b_conv2 = bias_variable([f2])
-            #X = tf.nn.relu(X+b_conv2)
             X = tf.layers.conv2d(X, f2, (kernel_size, kernel_size), padding='SAME', activation=tf.nn.relu)
 
             #third 1*1*f3
-            #W_conv3 = weight_variable([1,1, f2,f3])
-            #X = tf.nn.conv2d(X, W_conv3, strides=[1, 1, 1,1], padding='SAME')
-            #b_conv3 = bias_variable([f3])
-            #X = tf.nn.relu(X+b_conv3)
             X = tf.layers.conv2d(X, f3, (1, 1), padding='SAME', activation=tf.nn.relu)
+            
             #shortcut path
             W_shortcut =weight_variable([1, 1, in_filter, f3])
             x_shortcut = tf.nn.conv2d(x_shortcut, W_shortcut, strides=[1, stride, stride, 1], padding='VALID')
