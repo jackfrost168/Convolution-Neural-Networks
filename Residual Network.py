@@ -20,18 +20,16 @@ def bias_variable(shape):
 #定义残差网络的identity_block块(输入和输出维度相同)
 def identity_block(X_input, kernel_size, in_filter, out_filters, stage, block):
         """
-        Implementation of the identity block as defined in Figure 3
-
         Arguments:
-        X_input -- input tensor of shape (m, n_H_prev, n_W_prev, n_C_prev)
+        X_input -- input tensor of shape (batch, height, width, channels)
         kernel_size -- integer, specifying the shape of the middle CONV's window for the main path
         filter -- python list of integers, defining the number of filters in the CONV layers of the main path
         stage -- integer, used to name the layers, depending on their position in the network
         block -- string/character, used to name the layers, depending on their position in the network
-        training -- train or test
+        #training -- train or test
 
         Returns:
-        X -- output of the identity block, tensor of shape (n_H, n_W, n_C)
+        X -- output of the identity block, tensor of shape (batch, height, width, channels)
         """
 
         # defining name basis
@@ -60,19 +58,17 @@ def identity_block(X_input, kernel_size, in_filter, out_filters, stage, block):
 def convolutional_block( X_input, kernel_size, in_filter,
                             out_filters, stage, block, stride=1):
         """
-        Implementation of the convolutional block as defined in Figure 4
-
         Arguments:
-        X -- input tensor of shape (m, n_H_prev, n_W_prev, n_C_prev)
+        X -- input tensor of shape (batch, height, width, channels)
         kernel_size -- integer, specifying the shape of the middle CONV's window for the main path
         filters -- python list of integers, defining the number of filters in the CONV layers of the main path
         stage -- integer, used to name the layers, depending on their position in the network
         block -- string/character, used to name the layers, depending on their position in the network
-        training -- train or test
+        #training -- train or test
         stride -- Integer, specifying the stride to be used
 
         Returns:
-        X -- output of the convolutional block, tensor of shape (n_H, n_W, n_C)
+        X -- output of the convolutional block, tensor of shape (batch, height, width, channels)
         """
 
         # defining name basis
@@ -148,11 +144,3 @@ for i in range(2000):
         inputs_:input, y: batch[1], keep_prob: 1.0})
         print("step %d, training accuracy %g"%(i, train_accuracy))
     train_step.run(feed_dict={x: input, y: batch[1], keep_prob: 0.5})
-
-
-
-
-
-
-
-
